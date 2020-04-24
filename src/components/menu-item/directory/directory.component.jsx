@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MenItem from '../menu-item.component.jsx';
-import './directory.styles.scss'
+import './directory.styles.scss';
 export default class Directory extends Component {
   constructor() {
     super();
