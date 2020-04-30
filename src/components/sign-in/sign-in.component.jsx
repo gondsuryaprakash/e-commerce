@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './sign-in.style.scss';
-import { signInWithGoogle } from '../../firebase/firebase.utilities.jsx';
+import { auth, signInWithGoogle } from '../../firebase/firebase.utilities.jsx';
 import FormInput from '../form-input/form-input.component.jsx';
 import Button from '../custom-button/custom-button.component.jsx';
 export default class SignIm extends Component {
@@ -11,9 +11,15 @@ export default class SignIm extends Component {
       password: '',
     };
   }
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
-    this.setState({ email: '', password: '' });
+    const { email, password } = this.state;
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      this.setState({ email: '', password: '' });
+    } catch (e) {
+      console.log(e);
+    }
   };
   handleChange = (event) => {
     const { value, name } = event.target;
@@ -44,7 +50,9 @@ export default class SignIm extends Component {
             label='Password'
           />
           <div className='buttons'>
-            <Button type='submit'>Sign In</Button>
+            <Button type='submit' onClick={this.handleSubmit}>
+              Sign In
+            </Button>
             <Button onClick={signInWithGoogle} isGoogleSignIn>
               Sign in with Google
             </Button>
