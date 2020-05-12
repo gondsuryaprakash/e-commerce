@@ -5,6 +5,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Header from './components/header/header.component.jsx';
 import SignUp from './pages/signup-and-sighnIN/signup-signIn.component.jsx';
+import CheckOutPage from './pages/checkout/checkout.component.jsx';
 import { setCurrentUser } from './redux/user/user.action';
 import { selectCurrentUser } from './redux/user/user.selector';
 import { createStructuredSelector } from 'reselect';
@@ -48,6 +49,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route path='/shop' component={ShopPage} />
+          <Route path='/checkout' component={CheckOutPage} />
           <Route
             path='/signin'
             render={() =>
